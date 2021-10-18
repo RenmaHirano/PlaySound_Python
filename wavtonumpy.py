@@ -14,6 +14,8 @@ data, samplerate = sf.read(path)
 t = np.arange(0, len(data)) / samplerate
 
 # グラフ表示
+print("plotting wave graph, please close graph window")
+plt.figure(figsize=(24,8))
 plt.plot(t, data[:,0])
 plt.show()
 plt.close()
@@ -27,6 +29,6 @@ stream = p.open(format=pyaudio.paFloat32,
                 output=True)
                 
 # ch2(data) -> ch1(data[:,0])
-print(data[:,0])
+print("play sound")
 stream.write(data[:,0].astype(np.float32).tobytes())
 stream.close()
