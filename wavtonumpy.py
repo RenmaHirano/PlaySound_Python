@@ -1,4 +1,4 @@
-### wavファイルからグラフを出し、その音声を再生する
+### wavファイル -> numpy array -> plot & play sound(from array)
 ### 注意：大抵のWAVファイルは2chですが、1chしか出力していません。
 
 import soundfile as sf                      # wavファイルの取り扱いに使用
