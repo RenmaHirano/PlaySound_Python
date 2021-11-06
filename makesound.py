@@ -1,13 +1,14 @@
 # 任意の配列からその配列の音声を再生するコード
-
 import pyaudio
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.io.wavfile import write
+import datetime as dt
 
 RATE = 44100  # 44.1khz
 REPEAT_TIMES = 5  # 回心音を鳴らす
 
-gain = 20  # 初期振幅
+gain = 5  # 初期振幅
 frequency = 40  # (Hz)
 attenuationRate = 30  # 減衰率
 waveEndTime = 1  # 秒の振動になる
@@ -27,7 +28,7 @@ stream = p.open(format=pyaudio.paFloat32,   # int32型
 # 心音計算部分(A*sin(2*PIE*f*t)*exp(-Bt)の減衰正弦波形)
 time = np.arange(RATE*waveEndTime) / RATE  # = t
 attenuationArray = np.exp(-1 * attenuationRate * time) # = exp(-Bt)
-basicWave = np.sin(2 * np.pi * frequency * time) * attenuationArray  # = A*sin(2*PIE*f*t)*exp(-Bt)
+basicWave = gain * np.sin(2 * np.pi * frequency * time) * attenuationArray  # = A*sin(2*PIE*f*t)*exp(-Bt)
 firstWave = basicWave
 secondWave = secondWaveLoundness * np.roll(basicWave, int(RATE * waveEndTime * secondWaveShit))
 heatBeatWave = firstWave + secondWave
@@ -41,3 +42,8 @@ print("play")
 out = np.tile(heatBeatWave, REPEAT_TIMES)
 stream.write(out.astype(np.float32).tobytes())
 stream.close()
+
+# 心音をwavに保存
+print(dt.datetime.now())
+nowTime = dt.datetime.now().strftime('%Y%m%d-%H%M%S')
+write("output" + nowTime + ".wav" , RATE, out.astype(np.float32))
