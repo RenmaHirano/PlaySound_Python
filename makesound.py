@@ -12,7 +12,7 @@ gain = 5  # 初期振幅
 frequency = 40  # (Hz)
 attenuationRate = 30  # 減衰率
 waveEndTime = 1  # 秒の振動になる
-# ここからは2音に関わるパラメータ
+                 # ここからは2音に関わるパラメータ
 secondWaveShit = 0.3 # 心音が1秒に1回なると仮定した際、1音と2音がなる間の時間(sec)
                      # 普通は大体0.3秒くらいらしい
 secondWaveLoundness = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
