@@ -6,7 +6,7 @@ from scipy.io.wavfile import write
 import datetime as dt
 
 RATE = 44100  # 44.1khz
-REPEAT_TIMES = 5  # 回心音を鳴らす
+REPEAT_TIMES = 1  # 回心音を鳴らす
 WAVE_END_TIME = 1  # 秒の振動になる
                  # ここからは2音に関わるパラメータ
 DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際、1音と2音がなる間の時間(sec)
@@ -40,6 +40,7 @@ def GenerateHeartbeat(gain :float, frequency: float, attenuationRate: float, sec
     if saveSoundOption:
         nowTime = dt.datetime.now().strftime('%Y%m%d-%H%M%S')
         out = np.tile(heartBeatWave, REPEAT_TIMES)
+        # write(str(gain) + "_" + str(frequency) + "_" + str(attenuationRate) + ".wav" , RATE, out.astype(np.float32))
         write("output" + nowTime + "_Gain" + str(gain) + "_Freq" + str(frequency) + "_Atten" + str(attenuationRate) + "_Phi" + str(secondWaveShift) + ".wav" , RATE, out.astype(np.float32))
     
     return heartBeatWave
