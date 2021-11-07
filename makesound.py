@@ -58,9 +58,9 @@ def GenerateHeartbeat(gain :float, frequency: float, attenuationRate: float, sec
 
         phiString = "";
         if secondWaveShift == PHI_LIST[0]:
-            phiString = "Low";
+            phiString = "Narrow";
         if secondWaveShift == PHI_LIST[1]:
-            phiString = "High";
+            phiString = "Wide";
             
         # write(str(gain) + "_" + str(frequency) + "_" + str(attenuationRate) + ".wav" , RATE, out.astype(np.float32))
         write(freqString + attenuationString + phiString + ".wav" , RATE, out.astype(np.float32))
