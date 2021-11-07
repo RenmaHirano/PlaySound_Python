@@ -13,7 +13,8 @@ DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際�
                      # 普通は大体0.3秒くらいらしい
 SECOND_WAVE_LOUDNESS = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
 
-GAIN_LIST = [5, 10, 20]
+#GAIN_LIST = [5, 10, 20]
+GAIN_LIST = [5]
 FREQ_LIST = [30, 100, 300]
 ATTENUATION_LIST = [10, 30]
 PHI_LIST = [0.15, 0.35]
@@ -40,8 +41,30 @@ def GenerateHeartbeat(gain :float, frequency: float, attenuationRate: float, sec
     if saveSoundOption:
         nowTime = dt.datetime.now().strftime('%Y%m%d-%H%M%S')
         out = np.tile(heartBeatWave, REPEAT_TIMES)
+        
+        freqString = "";
+        if frequency == FREQ_LIST[0]:
+            freqString = "Low";
+        if frequency == FREQ_LIST[1]:
+            freqString = "Medium";
+        if frequency == FREQ_LIST[2]:
+            freqString = "High";
+
+        attenuationString = "";
+        if attenuationRate == ATTENUATION_LIST[0]:
+            attenuationString = "Low";
+        if attenuationRate == ATTENUATION_LIST[1]:
+            attenuationString = "High";
+
+        phiString = "";
+        if secondWaveShift == PHI_LIST[0]:
+            phiString = "Low";
+        if secondWaveShift == PHI_LIST[1]:
+            phiString = "High";
+            
         # write(str(gain) + "_" + str(frequency) + "_" + str(attenuationRate) + ".wav" , RATE, out.astype(np.float32))
-        write("output" + nowTime + "_Gain" + str(gain) + "_Freq" + str(frequency) + "_Atten" + str(attenuationRate) + "_Phi" + str(secondWaveShift) + ".wav" , RATE, out.astype(np.float32))
+        write(freqString + attenuationString + phiString + ".wav" , RATE, out.astype(np.float32))
+        #write("output" + nowTime + "_Gain" + str(gain) + "_Freq" + str(frequency) + "_Atten" + str(attenuationRate) + "_Phi" + str(secondWaveShift) + ".wav" , RATE, out.astype(np.float32))
     
     return heartBeatWave
 
