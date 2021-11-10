@@ -14,7 +14,7 @@ DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際�
 SECOND_WAVE_LOUDNESS = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
 
 #GAIN_LIST = [5, 10, 20]
-GAIN_LIST = [5]
+GAIN_LIST = [2]
 FREQ_LIST = [30, 100, 300]
 ATTENUATION_LIST = [10, 30]
 PHI_LIST = [0.15, 0.35]
