@@ -80,6 +80,11 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
 
 # 図出力部分
 def PlotGraph(heartBeatWave):
+    plt.title("A="+ str(gain) +", B="+ str(attenuationRate) + ", C=" + str(round(gainRatio,1)) +  ", phi=" + str(phi) + ", f=" + str(frequency), fontsize = 16)
+    plt.ylim(-1, 1)
+    plt.yticks([-1.0, -0.5, 0.0, 0.5, 1.0])
+    plt.xlim(0, RATE)
+    plt.xticks([0, RATE/4, RATE*2/4, RATE*3/4, RATE])
     plt.plot(heartBeatWave[0:RATE])
     plt.show()
     
@@ -101,12 +106,7 @@ def main():
                 for phi in PHI_LIST:
                     for gainRatio in GAIN_RATIO_LIST:
                         wave = GenerateHeartbeat(gain, gainRatio, frequency, attenuationRate, phi, True)
-                        plt.title("A="+ str(gain) +", B="+ str(attenuationRate) + ", C=" + str(round(gainRatio,1)) +  ", phi=" + str(phi) + ", f=" + str(frequency), fontsize = 16)
-                        plt.ylim(-1, 1)
-                        plt.yticks([-1.0, -0.5, 0.0, 0.5, 1.0])
-                        plt.xlim(0, RATE)
-                        plt.xticks([0, RATE/4, RATE*2/4, RATE*3/4, RATE])
-                        PlotGraph(wave)
+                        ##PlotGraph(wave)
     
     pass
 
