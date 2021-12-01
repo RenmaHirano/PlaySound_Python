@@ -60,7 +60,7 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
 
         phiString = ""
         if secondWaveShift == PHI_LIST[0]:
-            phiString = "Narrow"
+            phiString = "Low"
         if secondWaveShift == PHI_LIST[1]:
             phiString = "Medium"
         if secondWaveShift == PHI_LIST[2]:
@@ -68,7 +68,7 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         
         gainRatioString = ""
         if gainRatio == GAIN_RATIO_LIST[0]:
-            gainRatioString = "Narrow"
+            gainRatioString = "Low"
         if gainRatio == GAIN_RATIO_LIST[1]:
             gainRatioString = "Medium"
         if gainRatio == GAIN_RATIO_LIST[2]:
