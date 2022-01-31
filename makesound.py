@@ -14,10 +14,10 @@ DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際�
 DEFAULT_SECOND_WAVE_LOUDNESS = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
 
 GAIN_LIST = [1.0]
-GAIN_RATIO_LIST = [0.3, 0.6, 0.9]
+GAIN_RATIO_LIST = [0.1, 0.35, 0.6]
 ATTENUATION_LIST = [10, 20, 30]
 FREQ_LIST = [30, 100, 300]
-PHI_LIST = [0.2, 0.4, 0.5]
+PHI_LIST = [0.1, 0.25, 0.4]
 
 # 音声を出力するためのストリームを開く
 def OpenStream():
