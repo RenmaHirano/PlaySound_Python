@@ -79,14 +79,48 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
     return heartBeatWave
 
 # 図出力部分
-def PlotGraph(heartBeatWave):
-    plt.title("A="+ str(gain) +", B="+ str(attenuationRate) + ", C=" + str(round(gainRatio,1)) +  ", phi=" + str(phi) + ", f=" + str(frequency), fontsize = 16)
+def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate: float, secondWaveShift: float):
+    # plt.title("A="+ str(gain) +", B="+ str(attenuationRate) + ", C=" + str(round(gainRatio,1)) +  ", phi=" + str(phi) + ", f=" + str(frequency), fontsize = 16)
+    plt.close()
     plt.ylim(-1, 1)
     plt.yticks([-1.0, -0.5, 0.0, 0.5, 1.0])
     plt.xlim(0, RATE)
     plt.xticks([0, RATE/4, RATE*2/4, RATE*3/4, RATE])
     plt.plot(heartBeatWave[0:RATE])
-    plt.show()
+    freqString = ""
+    if frequency == FREQ_LIST[0]:
+        freqString = "Low"
+    if frequency == FREQ_LIST[1]:
+        freqString = "Medium"
+    if frequency == FREQ_LIST[2]:
+        freqString = "High"
+
+    attenuationString = ""
+    if attenuationRate == ATTENUATION_LIST[0]:
+        attenuationString = "Low"
+    if attenuationRate == ATTENUATION_LIST[1]:
+        attenuationString = "Medium"
+    if attenuationRate == ATTENUATION_LIST[2]:
+        attenuationString = "High"
+
+    phiString = ""
+    if secondWaveShift == PHI_LIST[0]:
+        phiString = "Low"
+    if secondWaveShift == PHI_LIST[1]:
+        phiString = "Medium"
+    if secondWaveShift == PHI_LIST[2]:
+        phiString = "High"
+        
+    gainRatioString = ""
+    if gainRatio == GAIN_RATIO_LIST[0]:
+        gainRatioString = "Low"
+    if gainRatio == GAIN_RATIO_LIST[1]:
+        gainRatioString = "Medium"
+    if gainRatio == GAIN_RATIO_LIST[2]:
+        gainRatioString = "High"
+    
+    plt.savefig(gainRatioString + freqString + attenuationString + phiString +  ".png")
+    # plt.show()
     
     pass
 
@@ -106,7 +140,7 @@ def main():
                 for phi in PHI_LIST:
                     for gainRatio in GAIN_RATIO_LIST:
                         wave = GenerateHeartbeat(gain, gainRatio, frequency, attenuationRate, phi, True)
-                        ##PlotGraph(wave)
+                        PlotGraph(wave, gainRatio, frequency, attenuationRate, phi)
     
     pass
 
