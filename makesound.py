@@ -52,7 +52,7 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         if frequency == FREQ_LIST[1]:
             freqString = "LowerMed"
         if frequency == FREQ_LIST[2]:
-            freqString = "Med"
+            freqString = "Medium"
         if frequency == FREQ_LIST[3]:
             freqString = "HigherMed"
         if frequency == FREQ_LIST[4]:
@@ -68,7 +68,7 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         if secondWaveShift == PHI_LIST[1]:
             phiString = "LowerMed"
         if secondWaveShift == PHI_LIST[2]:
-            phiString = "Med"
+            phiString = "Medium"
         if secondWaveShift == PHI_LIST[3]:
             phiString = "HigherMed"
         if secondWaveShift == PHI_LIST[4]:
@@ -93,7 +93,7 @@ def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate
     if frequency == FREQ_LIST[1]:
         freqString = "LowerMed"
     if frequency == FREQ_LIST[2]:
-        freqString = "Med"
+        freqString = "Medium"
     if frequency == FREQ_LIST[3]:
         freqString = "HigherMed"
     if frequency == FREQ_LIST[4]:
@@ -109,7 +109,7 @@ def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate
     if secondWaveShift == PHI_LIST[1]:
         phiString = "LowerMed"
     if secondWaveShift == PHI_LIST[2]:
-        phiString = "Med"
+        phiString = "Medium"
     if secondWaveShift == PHI_LIST[3]:
         phiString = "HigherMed"
     if secondWaveShift == PHI_LIST[4]:
