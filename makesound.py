@@ -44,27 +44,27 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         
         freqString = ""
         if frequency == FREQ_LIST[0]:
-            freqString = "Freq0"
+            freqString = "FreqLow"
         if frequency == FREQ_LIST[1]:
-            freqString = "Freq1"
+            freqString = "FreqLowerMed"
         if frequency == FREQ_LIST[2]:
-            freqString = "Freq2"
+            freqString = "FreqMed"
         if frequency == FREQ_LIST[3]:
-            freqString = "Freq3"
+            freqString = "FreqHigherMed"
         if frequency == FREQ_LIST[4]:
-            freqString = "Freq4"
+            freqString = "FreqHigh"
 
         phiString = ""
         if secondWaveShift == PHI_LIST[0]:
-            phiString = "Phi0"
+            phiString = "PhiLow"
         if secondWaveShift == PHI_LIST[1]:
-            phiString = "Phi1"
+            phiString = "PhiLowerMed"
         if secondWaveShift == PHI_LIST[2]:
-            phiString = "Phi2"
+            phiString = "PhiMed"
         if secondWaveShift == PHI_LIST[3]:
-            phiString = "Phi3"
+            phiString = "PhiHigherMed"
         if secondWaveShift == PHI_LIST[4]:
-            phiString = "Phi4"
+            phiString = "PhiHigh"
             
         write(freqString + phiString + ".wav" , RATE, out.astype(np.float32))
         
@@ -81,27 +81,27 @@ def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate
     plt.plot(heartBeatWave[0:RATE])
     freqString = ""
     if frequency == FREQ_LIST[0]:
-        freqString = "Freq0"
+        freqString = "FreqLow"
     if frequency == FREQ_LIST[1]:
-        freqString = "Freq1"
+        freqString = "FreqLowerMed"
     if frequency == FREQ_LIST[2]:
-        freqString = "Freq2"
+        freqString = "FreqMed"
     if frequency == FREQ_LIST[3]:
-        freqString = "Freq3"
+        freqString = "FreqHigherMed"
     if frequency == FREQ_LIST[4]:
-        freqString = "Freq4"
+        freqString = "FreqHigh"
 
     phiString = ""
     if secondWaveShift == PHI_LIST[0]:
-        phiString = "Phi0"
+        phiString = "PhiLow"
     if secondWaveShift == PHI_LIST[1]:
-        phiString = "Phi1"
+        phiString = "PhiLowerMed"
     if secondWaveShift == PHI_LIST[2]:
-        phiString = "Phi2"
+        phiString = "PhiMed"
     if secondWaveShift == PHI_LIST[3]:
-        phiString = "Phi3"
+        phiString = "PhiHigherMed"
     if secondWaveShift == PHI_LIST[4]:
-        phiString = "Phi4"
+        phiString = "PhiHigh"
     
     plt.savefig(freqString + phiString +  ".png")
     # plt.show()
