@@ -14,10 +14,10 @@ DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際�
 DEFAULT_SECOND_WAVE_LOUDNESS = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
 
 GAIN_LIST = [1.0]
-GAIN_RATIO_LIST = [0.3, 0.5, 0.7]
-ATTENUATION_LIST = [20, 30, 40]
-FREQ_LIST = [30, 100, 300]
-PHI_LIST = [0.2, 0.3, 0.4]
+GAIN_RATIO_LIST = [0.3]
+ATTENUATION_LIST = [30]
+FREQ_LIST = [50, 112.5, 175, 237.5, 300]
+PHI_LIST = [0.2, 0.25, 0.3, 0.35, 0.4]
 
 # 音声を出力するためのストリームを開く
 def OpenStream():
@@ -44,37 +44,29 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         
         freqString = ""
         if frequency == FREQ_LIST[0]:
-            freqString = "Low"
+            freqString = "Freq0"
         if frequency == FREQ_LIST[1]:
-            freqString = "Medium"
+            freqString = "Freq1"
         if frequency == FREQ_LIST[2]:
-            freqString = "High"
-
-        attenuationString = ""
-        if attenuationRate == ATTENUATION_LIST[0]:
-            attenuationString = "Low"
-        if attenuationRate == ATTENUATION_LIST[1]:
-            attenuationString = "Medium"
-        if attenuationRate == ATTENUATION_LIST[2]:
-            attenuationString = "High"
+            freqString = "Freq2"
+        if frequency == FREQ_LIST[3]:
+            freqString = "Freq3"
+        if frequency == FREQ_LIST[4]:
+            freqString = "Freq4"
 
         phiString = ""
         if secondWaveShift == PHI_LIST[0]:
-            phiString = "Low"
+            phiString = "Phi0"
         if secondWaveShift == PHI_LIST[1]:
-            phiString = "Medium"
+            phiString = "Phi1"
         if secondWaveShift == PHI_LIST[2]:
-            phiString = "High"
-        
-        gainRatioString = ""
-        if gainRatio == GAIN_RATIO_LIST[0]:
-            gainRatioString = "Low"
-        if gainRatio == GAIN_RATIO_LIST[1]:
-            gainRatioString = "Medium"
-        if gainRatio == GAIN_RATIO_LIST[2]:
-            gainRatioString = "High"
+            phiString = "Phi2"
+        if secondWaveShift == PHI_LIST[3]:
+            phiString = "Phi3"
+        if secondWaveShift == PHI_LIST[4]:
+            phiString = "Phi4"
             
-        write(gainRatioString + freqString + attenuationString + phiString + ".wav" , RATE, out.astype(np.float32))
+        write(freqString + phiString + ".wav" , RATE, out.astype(np.float32))
         
     return heartBeatWave
 
@@ -89,37 +81,29 @@ def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate
     plt.plot(heartBeatWave[0:RATE])
     freqString = ""
     if frequency == FREQ_LIST[0]:
-        freqString = "Low"
+        freqString = "Freq0"
     if frequency == FREQ_LIST[1]:
-        freqString = "Medium"
+        freqString = "Freq1"
     if frequency == FREQ_LIST[2]:
-        freqString = "High"
-
-    attenuationString = ""
-    if attenuationRate == ATTENUATION_LIST[0]:
-        attenuationString = "Low"
-    if attenuationRate == ATTENUATION_LIST[1]:
-        attenuationString = "Medium"
-    if attenuationRate == ATTENUATION_LIST[2]:
-        attenuationString = "High"
+        freqString = "Freq2"
+    if frequency == FREQ_LIST[3]:
+        freqString = "Freq3"
+    if frequency == FREQ_LIST[4]:
+        freqString = "Freq4"
 
     phiString = ""
     if secondWaveShift == PHI_LIST[0]:
-        phiString = "Low"
+        phiString = "Phi0"
     if secondWaveShift == PHI_LIST[1]:
-        phiString = "Medium"
+        phiString = "Phi1"
     if secondWaveShift == PHI_LIST[2]:
-        phiString = "High"
-        
-    gainRatioString = ""
-    if gainRatio == GAIN_RATIO_LIST[0]:
-        gainRatioString = "Low"
-    if gainRatio == GAIN_RATIO_LIST[1]:
-        gainRatioString = "Medium"
-    if gainRatio == GAIN_RATIO_LIST[2]:
-        gainRatioString = "High"
+        phiString = "Phi2"
+    if secondWaveShift == PHI_LIST[3]:
+        phiString = "Phi3"
+    if secondWaveShift == PHI_LIST[4]:
+        phiString = "Phi4"
     
-    plt.savefig(gainRatioString + freqString + attenuationString + phiString +  ".png")
+    plt.savefig(freqString + phiString +  ".png")
     # plt.show()
     
     pass
