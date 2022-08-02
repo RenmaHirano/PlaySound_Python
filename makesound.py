@@ -22,7 +22,7 @@ PHI_LIST = [0.2, 0.25, 0.3, 0.35, 0.4]
 # 音声を出力するためのストリームを開く
 def OpenStream():
     p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paFloat32,   # int32型
+    stream = p.open(format=pyaudio.paFloat32,   # float32型
                     channels=1,                 # モノラル
                     rate=RATE,                 # 44.1khz
                     frames_per_buffer=1024,     # よくわからないが1024以外にするとエラーが起きる。
@@ -42,31 +42,39 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         nowTime = dt.datetime.now().strftime('%Y%m%d-%H%M%S')
         out = np.tile(heartBeatWave, REPEAT_TIMES)
         
+        gainRatioString = ""
+        if gainRatio == GAIN_RATIO_LIST[0]:
+            gainRatioString = "Medium"
+        
         freqString = ""
         if frequency == FREQ_LIST[0]:
-            freqString = "FreqLow"
+            freqString = "Low"
         if frequency == FREQ_LIST[1]:
-            freqString = "FreqLowerMed"
+            freqString = "LowerMed"
         if frequency == FREQ_LIST[2]:
-            freqString = "FreqMed"
+            freqString = "Med"
         if frequency == FREQ_LIST[3]:
-            freqString = "FreqHigherMed"
+            freqString = "HigherMed"
         if frequency == FREQ_LIST[4]:
-            freqString = "FreqHigh"
+            freqString = "High"
+            
+        attenuationString = ""
+        if attenuationRate == ATTENUATION_LIST[0]:
+            attenuationString = "Medium"
 
         phiString = ""
         if secondWaveShift == PHI_LIST[0]:
-            phiString = "PhiLow"
+            phiString = "Low"
         if secondWaveShift == PHI_LIST[1]:
-            phiString = "PhiLowerMed"
+            phiString = "LowerMed"
         if secondWaveShift == PHI_LIST[2]:
-            phiString = "PhiMed"
+            phiString = "Med"
         if secondWaveShift == PHI_LIST[3]:
-            phiString = "PhiHigherMed"
+            phiString = "HigherMed"
         if secondWaveShift == PHI_LIST[4]:
-            phiString = "PhiHigh"
+            phiString = "High"
             
-        write(freqString + phiString + ".wav" , RATE, out.astype(np.float32))
+        write(gainRatioString + freqString + attenuationString + phiString + ".wav" , RATE, out.astype(np.float32))
         
     return heartBeatWave
 
@@ -81,29 +89,37 @@ def PlotGraph(heartBeatWave, gainRatio :float, frequency: float, attenuationRate
     plt.plot(heartBeatWave[0:RATE])
     freqString = ""
     if frequency == FREQ_LIST[0]:
-        freqString = "FreqLow"
+        freqString = "Low"
     if frequency == FREQ_LIST[1]:
-        freqString = "FreqLowerMed"
+        freqString = "LowerMed"
     if frequency == FREQ_LIST[2]:
-        freqString = "FreqMed"
+        freqString = "Med"
     if frequency == FREQ_LIST[3]:
-        freqString = "FreqHigherMed"
+        freqString = "HigherMed"
     if frequency == FREQ_LIST[4]:
-        freqString = "FreqHigh"
+        freqString = "High"
+        
+    attenuationString = ""
+    if attenuationRate == ATTENUATION_LIST[0]:
+        attenuationString = "Medium"
 
     phiString = ""
     if secondWaveShift == PHI_LIST[0]:
-        phiString = "PhiLow"
+        phiString = "Low"
     if secondWaveShift == PHI_LIST[1]:
-        phiString = "PhiLowerMed"
+        phiString = "LowerMed"
     if secondWaveShift == PHI_LIST[2]:
-        phiString = "PhiMed"
+        phiString = "Med"
     if secondWaveShift == PHI_LIST[3]:
-        phiString = "PhiHigherMed"
+        phiString = "HigherMed"
     if secondWaveShift == PHI_LIST[4]:
-        phiString = "PhiHigh"
+        phiString = "High"
+        
+    gainRatioString = ""
+    if gainRatio == GAIN_RATIO_LIST[0]:
+        gainRatioString = "Medium"
     
-    plt.savefig(freqString + phiString +  ".png")
+    plt.savefig(gainRatioString + freqString + attenuationString + phiString +  ".png")
     # plt.show()
     
     pass
