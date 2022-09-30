@@ -15,7 +15,7 @@ DEFAULT_SECOND_WAVE_SHIFT = 0.3 # 心音が1秒に1回なると仮定した際�
                      # 普通は大体0.3秒くらいらしい
 DEFAULT_SECOND_WAVE_LOUDNESS = 0.3 # 1音に対する音量の比。たとえば0.1なら1/10の音量になります。
 
-GAIN_LIST = [1.0, 0.04, 0.017, 0.0115, 0.012]
+GAIN_LIST = [1.0, 0.27, 0.108, 0.72, 0.73]
 GAIN_RATIO_LIST = [0.3]
 ATTENUATION_LIST = [30]
 FREQ_LIST = [50, 112.5, 175, 237.5, 300]
@@ -31,7 +31,6 @@ def OpenStream():
                     output=True)                # 録音する時はinput = trueにする
     return stream
 
-# sin波形出したい時用
 def GenerateSinWave():
     gain = 1.0
     freq = 0
@@ -43,8 +42,7 @@ def GenerateSinWave():
     
     return sinWave
 
-# 心音出力関数(gain * sin(2*PIE*frequency*t)*exp(-attenuationRate * t)の減衰正弦波形)
-def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuationRate: float, secondWaveShift: float, saveSoundOption = False):
+def GenerateHeartbeatWave(gain :float, gainRatio :float, frequency: float, attenuationRate: float, secondWaveShift: float, saveSoundOption = False):
     time = np.arange(RATE*WAVE_END_TIME) / RATE  # = t
     attenuationArray = np.exp(-1 * attenuationRate * time) # = exp(-Bt)
     basicWave = gain * np.sin(2 * np.pi * frequency * time) * attenuationArray  # = A*sin(2*PIE*f*t)*exp(-Bt)
@@ -88,7 +86,7 @@ def GenerateHeartbeat(gain :float, gainRatio :float, frequency: float, attenuati
         if secondWaveShift == PHI_LIST[4]:
             phiString = "High"
             
-        outputText = freqString + "gain" +str(gain) + ".wav";
+        outputText = gainRatioString + freqString + attenuationString + phiString + ".wav";
         
         write(outputText , RATE, out.astype(np.float32))
         
@@ -150,14 +148,13 @@ def PlaySound(heartBeatWave, stream):
     pass
 
 def main():
-    """
     for i in [0, 1, 2, 3, 4]:
         gain = GAIN_LIST[i]
         frequency = FREQ_LIST[i]
         for phi in PHI_LIST:
             for attenuationRate in ATTENUATION_LIST:
                     for gainRatio in GAIN_RATIO_LIST:
-                        wave = GenerateHeartbeat(gain, gainRatio, frequency, attenuationRate, phi, True)
+                        wave = GenerateHeartbeatWave(gain, gainRatio, frequency, attenuationRate, phi, True)
                         PlotGraph(wave, gainRatio, frequency, attenuationRate, phi)
 
 
@@ -169,14 +166,6 @@ def main():
     plt.xticks([0, RATE/4, RATE*2/4, RATE*3/4, RATE])
     plt.plot(wave[0:RATE])
     # plt.show()
-    """
-    
-    # メモ：LOW Vpp = 720mV
-    gains = [0.078, 0.077, 0.076,0.075,0.074,0.073]
-    stream = OpenStream()
-    for gain in gains:
-        wave = GenerateHeartbeat(gain, 0.3, FREQ_LIST[4], 30, 0.3, TRUE);
-    # PlaySound(wave, stream)
     
     
     pass
