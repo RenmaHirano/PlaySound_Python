@@ -45,9 +45,10 @@ def GenerateSinWave():
 def GenerateHeartbeatWave(gain :float, gainRatio :float, frequency: float, attenuationRate: float, secondWaveShift: float, saveSoundOption = False):
     time = np.arange(RATE*WAVE_END_TIME) / RATE  # = t
     attenuationArray = np.exp(-1 * attenuationRate * time) # = exp(-Bt)
+    basicalWaveShift = 0.1
     basicWave = gain * np.sin(2 * np.pi * frequency * time) * attenuationArray  # = A*sin(2*PIE*f*t)*exp(-Bt)
-    firstWave = basicWave
-    secondWave = gainRatio * np.roll(basicWave, int(RATE * WAVE_END_TIME * secondWaveShift))
+    firstWave = np.roll(basicWave, int(RATE * WAVE_END_TIME * basicalWaveShift))
+    secondWave = gainRatio * np.roll(firstWave, int(RATE * WAVE_END_TIME * secondWaveShift))
     heartBeatWave = firstWave + secondWave
     
     if saveSoundOption:
