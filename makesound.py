@@ -1,4 +1,4 @@
-# 任意の配列からその配列の音声を再生するコード
+# 任意の配列からその配列の音声を再生するコード ver.experiment1
 from pickle import LIST, TRUE
 from telnetlib import GA
 import pyaudio
